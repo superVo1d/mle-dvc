@@ -14,14 +14,14 @@ def evaluate_model():
 
     data = pd.read_csv('data/initial_data.csv')
 
-    cv_strategy = StratifiedKFold(n_splits=5)
+    cv_strategy = StratifiedKFold(n_splits=params['n_splits'])
     cv_res = cross_validate(
         pipeline,
         data,
         data['target'],
         cv=cv_strategy,
-        n_jobs=-1,
-        scoring=['f1', 'roc_auc']
+        n_jobs=params['n_jobs'],
+        scoring=params['metrics']
         )
     
     result = {}
